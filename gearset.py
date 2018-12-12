@@ -1,7 +1,7 @@
 class GearSet(object):
     def __init__(self):
-        gear_slot = ["belt", "boots", "chest", "gloves", "helmet", "neck",
-                     "ring1", "ring2", "weapon"]
+        gear_slot = ["belt", "boot", "chest", "glove", "helm", "neck",
+                     "ring1", "ring2", "weap"]
         self._gear_set = {k: False for k in gear_slot}
 
     def reset_gear_set(self):
@@ -25,8 +25,6 @@ def main():
     print(gear_1.get_gear_set())
     gear_1.toggle_gear("belt")
     print(gear_1.get_gear_set())
-    # gear_1.toggle_gear("belt")
-    # print(gear_1.get_gear_set())
     gear_1.reset_gear_set()
     print(gear_1.get_gear_set())
 

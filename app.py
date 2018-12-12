@@ -6,10 +6,12 @@ from PyQt5.QtWidgets import (QApplication, QVBoxLayout, QMainWindow,
 
 from gearset import GearSet
 from gearsetwidget import GearSetWidget
+from trackgearsetwidget import TrackGearSetWidget
 
 class ChaosTrackerApp(QMainWindow):
-    def __init__(self):
+    def __init__(self, win_id):
         super().__init__()
+        self._win_id = win_id
         self._gear_set_1 = GearSet()
         self._gear_set_2 = GearSet()
         self.init_ui()
@@ -28,8 +30,11 @@ class ChaosTrackerApp(QMainWindow):
         widget_central.setLayout(vbox)
         self.widget_gear_set_1 = GearSetWidget(self._gear_set_1)
         self.widget_gear_set_2 = GearSetWidget(self._gear_set_2)
+        self.widget_track_gear_set = TrackGearSetWidget(
+            self._win_id, self.widget_gear_set_1, self.widget_gear_set_2)
         vbox.addWidget(self.widget_gear_set_1)
         vbox.addWidget(self.widget_gear_set_2)
+        vbox.addWidget(self.widget_track_gear_set)
 
         self.shortcut_exit = QShortcut(QKeySequence("Ctrl+W"), self)
         self.shortcut_exit.activated.connect(self.close)
@@ -39,8 +44,9 @@ class ChaosTrackerApp(QMainWindow):
         self.show()
 
 if __name__ == "__main__":
-    new_font = QFont("Consolas", 8)
+    new_font = QFont("Consolas")
     app = QApplication(sys.argv)
-    chaos_tracker_app = ChaosTrackerApp()
+    long_qdesktop_id = QApplication.desktop().winId()
+    chaos_tracker_app = ChaosTrackerApp(long_qdesktop_id)
     app.setFont(new_font)
     sys.exit(app.exec_())
