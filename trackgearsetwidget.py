@@ -51,6 +51,7 @@ class TrackGearSetWidget(QWidget):
         self.setLayout(grid)
         button = QPushButton("Setup")
         button.setObjectName("trackButton")
+        button.setFixedWidth(40)
         button.clicked[bool].connect(self.setup_stash_grid)
         grid.addWidget(button, 0, 0)
 
@@ -69,10 +70,20 @@ class TrackGearSetWidget(QWidget):
                 min-width: 3em;
                 padding: 1px;
             }
+            QPushButton#trackButton:pressed {
+                background-color: #F8E9A8;
+                border-style: outset;
+                border-width: 1px;
+                border-color: #F8E9A8;
+                font: 12px;
+                min-width: 3em;
+                padding: 1px;
+            }
         """)
 
     def setup_stash_grid(self):
         self._get_box()
+        print(self._box)
         self._capture_stash()
         self._get_grid()
 
@@ -89,6 +100,7 @@ class TrackGearSetWidget(QWidget):
                     val.append(np.mean(img_bin[i : i + self._side_length,
                                                j : j + self._side_length]))
                 self._gear_set[n].set_button_checked(k, np.mean(val) > 10.0)
+            print(self._gear_set[n])
 
     def _get_box(self):
         """Return the top left and bottom right coordinates of a screen

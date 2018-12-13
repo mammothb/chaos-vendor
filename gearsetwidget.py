@@ -19,37 +19,26 @@ class GearSetWidget(QWidget):
             button.setObjectName("gearButton")
             button.setCheckable(True)
             button.setChecked(value)
+            button.setEnabled(False)
             button.clicked[bool].connect(self.update_gear_status)
             self._buttons[key] = button
             grid.addWidget(button, 0, i)
-        button = QPushButton("Reset")
-        button.setObjectName("resetButton")
-        button.clicked[bool].connect(self.reset_gear_status)
-        grid.addWidget(button, 0, len(gear_set_status.items()))
 
     def set_style_sheet(self):
         self.setStyleSheet("""
-            QPushButton#gearButton {
+            QPushButton#gearButton:disabled {
                 background-color: #F8E9A8;
                 border-style: outset;
                 border-width: 1px;
                 border-color: #F8E9A8;
+                color: black;
                 font: 12px;
-                min-width: 3em;
+                min-width: 2.8em;
                 padding: 1px;
             }
-            QPushButton#gearButton:checked {
+            QPushButton#gearButton:disabled:checked {
                 background-color: #BC3C4B;
                 border-style: inset;
-            }
-            QPushButton#resetButton {
-                background-color: #819033;
-                border-style: outset;
-                border-width: 1px;
-                border-color: #F8E9A8;
-                font: 12px;
-                min-width: 3em;
-                padding: 1px;
             }
         """)
 
