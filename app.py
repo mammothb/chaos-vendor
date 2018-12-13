@@ -39,7 +39,7 @@ class ChaosTrackerApp(QMainWindow):
         self.shortcut_exit = QShortcut(QKeySequence("Ctrl+W"), self)
         self.shortcut_exit.activated.connect(self.close)
 
-        self.setGeometry(685, 990, 300, 10)
+        self.setGeometry(700, 990, 300, 10)
 
         self.show()
 
